@@ -3,1029 +3,471 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Samed Demir – Mobile Software Engineer at LC Waikiki. Specializing in Flutter & Dart, building cross-platform mobile apps from Istanbul." />
-  <meta name="keywords" content="Samed Demir, Flutter Developer, Mobile Engineer, LC Waikiki, Dart, Android, iOS, Istanbul" />
-  <meta property="og:title" content="Samed Demir – Mobile Software Engineer" />
-  <meta property="og:description" content="Software Engineer @ LC Waikiki · Flutter & Dart · Istanbul" />
+  <meta name="description" content="Samed Demir, Senior Mobile Software Engineer at LC Waikiki in Istanbul. Flutter and Dart apps for kiosks, hand terminals and phones, with Zebra printer and barcode scanner integrations." />
+  <meta name="keywords" content="Samed Demir, Flutter Developer, Mobile Engineer, LC Waikiki, Dart, Android, iOS, Zebra, ZPL, Istanbul" />
+  <meta property="og:title" content="Samed Demir – Senior Mobile Software Engineer" />
+  <meta property="og:description" content="Flutter apps that print, scan and sync on the shop floor. Based in Istanbul." />
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/43873156?v=4" />
   <meta property="og:url" content="https://sameetdmr.github.io/" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="summary" />
   <meta name="twitter:creator" content="@sameetdmrr" />
+  <meta name="theme-color" content="#E8EBEF" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#14181D" media="(prefers-color-scheme: dark)" />
   <title>Samed Demir – Senior Mobile Software Engineer</title>
   <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="manifest" href="manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #080a10;
-      --bg-2: #0e1118;
-      --bg-card: #13161f;
-      --bg-card-2: #181c27;
-      --border: rgba(255,255,255,0.07);
-      --border-hover: rgba(79,142,247,0.3);
-      --text: #eceef5;
-      --text-muted: #7b849e;
-      --text-dim: #3d4258;
-      --accent: #4f8ef7;
-      --accent-light: #7aaeff;
-      --accent-2: #38bdf8;
-      --accent-glow: rgba(79,142,247,0.15);
-      --green: #34d399;
-      --orange: #fb923c;
-      --purple: #a78bfa;
-      --radius: 14px;
-      --radius-sm: 8px;
-      --shadow: 0 8px 48px rgba(0,0,0,0.5);
-      --shadow-accent: 0 0 40px rgba(79,142,247,0.2);
+      --shelf: #E8EBEF;      /* page */
+      --panel: #F4F6F8;      /* raised surface */
+      --ink: #14181D;
+      --muted: #56606B;
+      --rule: #C6CCD4;
+      --blue: #0B57D0;       /* Flutter blue, links and actions */
+      --liner: #F2CF45;      /* label-roll backing paper */
+      --stock: #FCFCFA;      /* label paper, same in both themes */
+      --print: #101214;      /* thermal print, same in both themes */
+      --condensed: "Archivo", "Arial Narrow", sans-serif;
+      --body: "Archivo", system-ui, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+      --wrap: 1120px;
+      --gutter: clamp(1.25rem, 4vw, 2.5rem);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --shelf: #14181D; --panel: #1B2026; --ink: #ECEFF2;
+        --muted: #9BA5AF; --rule: #2E353D; --blue: #8AB4FF;
+      }
     }
 
-    html { scroll-behavior: smooth; }
-
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
+      font-family: var(--body); font-size: 1.0625rem; line-height: 1.6;
+      background: var(--shelf); color: var(--ink);
+      -webkit-font-smoothing: antialiased;
     }
+    ::selection { background: var(--liner); color: #14181D; }
+    a { color: var(--blue); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: var(--gutter); }
 
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
-    ::selection { background: rgba(79,142,247,0.28); }
+    h1, h2, h3 { font-family: var(--condensed); font-stretch: 68%; line-height: 1; letter-spacing: -0.01em; }
+    h1 { font-size: clamp(2.5rem, 4.6vw, 3.75rem); font-weight: 800; line-height: 1; text-wrap: balance; max-width: 13em; }
+    h2 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 750; }
+    h3 { font-size: 1.625rem; font-weight: 700; line-height: 1.1; }
+    p { max-width: 62ch; }
+    .muted { color: var(--muted); }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2.5rem; height: 64px;
-      background: rgba(8,10,16,0.8);
-      backdrop-filter: blur(20px) saturate(1.4);
-      border-bottom: 1px solid var(--border);
+    /* nav */
+    .nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--shelf) 88%, transparent);
+      backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule);
     }
-    .nav-logo {
-      font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px;
-      color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
-    }
-    .nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-    .nav-links a {
-      color: var(--text-muted); text-decoration: none; font-size: 0.875rem;
-      font-weight: 500; transition: color 0.2s; letter-spacing: 0.1px;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-cta {
-      background: var(--accent) !important; color: #fff !important;
-      padding: 0.45rem 1.1rem; border-radius: 7px; font-weight: 600 !important;
-    }
-    .nav-cta:hover { opacity: 0.88; }
-    .nav-menu-btn {
-      display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; cursor: pointer; padding: 4px;
-    }
-    .nav-menu-btn span {
-      display: block; width: 22px; height: 2px;
-      background: var(--text); border-radius: 2px; transition: all 0.3s;
-    }
-    .mobile-nav {
-      display: none; position: fixed; top: 64px; left: 0; right: 0;
-      background: var(--bg-2); border-bottom: 1px solid var(--border);
-      flex-direction: column; padding: 1rem 2rem 1.5rem; gap: 0.25rem; z-index: 199;
-    }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav a {
-      color: var(--text-muted); text-decoration: none; font-size: 1rem;
-      font-weight: 500; padding: 0.6rem 0; border-bottom: 1px solid var(--border);
-    }
-    .mobile-nav a:last-child { border: none; }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.75rem; }
+    .nav-name { font-family: var(--condensed); font-stretch: 68%; font-weight: 800; font-size: 1.375rem; color: var(--ink); text-decoration: none; }
+    .nav ul { display: flex; gap: clamp(0.9rem, 2vw, 1.75rem); list-style: none; align-items: center; }
+    .nav ul a { color: var(--muted); text-decoration: none; font-size: 0.9375rem; font-weight: 500; }
+    .nav ul a:hover { color: var(--ink); }
+    @media (max-width: 720px) { .nav .sec-link { display: none; } }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh; display: flex; align-items: center;
-      padding: 100px 2.5rem 60px; position: relative; overflow: hidden;
-    }
-    .hero-orb-1 {
-      position: absolute; width: 700px; height: 700px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 65%);
-      top: -100px; right: -150px; pointer-events: none;
-    }
-    .hero-orb-2 {
-      position: absolute; width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(56,189,248,0.07) 0%, transparent 65%);
-      bottom: 0; left: -100px; pointer-events: none;
-    }
-    .hero-grid {
-      position: absolute; inset: 0; pointer-events: none; opacity: 0.4;
-      background-image:
-        linear-gradient(rgba(79,142,247,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(79,142,247,0.04) 1px, transparent 1px);
-      background-size: 70px 70px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
-    }
-    .hero-inner {
-      max-width: 1160px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: center;
-      position: relative; z-index: 1;
-    }
-
-    /* Company badge */
-    .company-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 99px; padding: 0.35rem 1rem 0.35rem 0.5rem;
-      font-size: 0.8rem; font-weight: 500; color: var(--text-muted);
-      margin-bottom: 1.75rem;
-    }
-    .company-badge-logo {
-      width: 22px; height: 22px; border-radius: 50%; overflow: hidden;
-      background: #fff; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .company-badge-logo img { width: 100%; height: 100%; object-fit: contain; }
-    .company-badge strong { color: var(--text); }
-
-    .hero h1 {
-      font-size: clamp(2.6rem, 5.5vw, 4rem); font-weight: 900;
-      line-height: 1.08; letter-spacing: -2px; margin-bottom: 1.5rem;
-    }
-    .hero h1 .line-1 { display: block; color: var(--text); }
-    .hero h1 .line-2 {
-      display: block;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-desc {
-      font-size: 1.08rem; color: var(--text-muted); max-width: 500px;
-      margin-bottom: 2.25rem; line-height: 1.8;
-    }
-    .hero-desc strong { color: var(--text); }
-
-    .hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; }
     .btn {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.75rem 1.5rem; border-radius: var(--radius-sm);
-      font-weight: 600; font-size: 0.9rem; text-decoration: none;
-      transition: all 0.2s; cursor: pointer; border: none; font-family: inherit;
+      font: 600 0.9375rem/1 var(--body); text-decoration: none;
+      padding: 0.8rem 1.15rem; border-radius: 4px; border: 1.5px solid var(--ink);
+      color: var(--ink); background: transparent; cursor: pointer;
     }
-    .btn-primary {
-      background: var(--accent); color: #fff;
-      box-shadow: 0 4px 24px rgba(79,142,247,0.4);
-    }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(79,142,247,0.5); }
-    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-    .btn-outline:hover { border-color: var(--border-hover); color: var(--accent); transform: translateY(-2px); }
+    .btn:hover { background: var(--ink); color: var(--shelf); }
+    .btn.solid { background: var(--ink); color: var(--shelf); }
+    .btn.solid:hover { background: var(--blue); border-color: var(--blue); color: var(--shelf); }
+    .nav .btn { padding: 0.55rem 0.9rem; color: var(--ink); }
+    .nav .btn:hover { color: var(--shelf); }
+    .btn svg { width: 1rem; height: 1rem; flex: none; }
 
-    /* Profile card */
-    .hero-visual { display: flex; justify-content: center; }
-    .profile-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 22px; padding: 2rem 1.75rem; text-align: center;
-      box-shadow: var(--shadow), var(--shadow-accent); width: 100%; max-width: 290px;
-      position: relative; overflow: hidden;
+    /* hero */
+    .hero .wrap {
+      display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: clamp(2rem, 6vw, 5rem); align-items: center;
+      padding-block: clamp(2.5rem, 5vw, 4rem);
     }
-    .profile-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    }
-    .profile-glow {
-      position: absolute; width: 200px; height: 200px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 70%);
-      top: -50px; left: 50%; transform: translateX(-50%); pointer-events: none;
-    }
-    .profile-img {
-      width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 1rem;
-      display: block; object-fit: cover;
-      border: 2px solid rgba(79,142,247,0.5);
-      box-shadow: 0 0 24px rgba(79,142,247,0.4), 0 0 0 6px rgba(79,142,247,0.08);
-      position: relative; z-index: 1;
-    }
-    .profile-name { font-weight: 800; font-size: 1.1rem; margin-bottom: 0.2rem; letter-spacing: -0.3px; }
-    .profile-title { color: var(--accent); font-size: 0.8rem; font-weight: 600; margin-bottom: 0.25rem; letter-spacing: 0.2px; }
-    .profile-company { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.25rem; }
-    .profile-location {
-      display: flex; align-items: center; justify-content: center; gap: 0.35rem;
-      color: var(--text-dim); font-size: 0.78rem; margin-bottom: 1.5rem;
-    }
-    .online-dot {
-      width: 8px; height: 8px; border-radius: 50%; background: var(--green);
-      box-shadow: 0 0 6px var(--green); animation: pulse 2.5s infinite; flex-shrink: 0;
-    }
-    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+    .hero-copy p { font-size: 1.125rem; line-height: 1.6; margin-top: 1.25rem; max-width: 32em; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+    .hero-copy .status { display: flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem; font-size: 0.9375rem; color: var(--muted); }
+    .status i { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: #1E9E5A; flex: none; }
 
-    .profile-badges { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .profile-badge {
-      background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.2);
-      border-radius: 99px; padding: 0.2rem 0.65rem;
-      font-size: 0.72rem; font-weight: 600; color: var(--accent-light);
-      font-family: 'JetBrains Mono', monospace;
+    /* the printer + label */
+    .printer { width: min(100%, 23rem); justify-self: end; }
+    .slot {
+      height: 1.5rem; border-radius: 6px 6px 2px 2px; position: relative; z-index: 2;
+      background: #101214; box-shadow: 0 2px 0 #2B3037 inset, 0 6px 10px -4px rgba(0,0,0,.45);
     }
+    .slot::after { content: ""; position: absolute; left: 6%; right: 6%; bottom: 3px; height: 3px; background: #000; border-radius: 2px; }
+    .feed {
+      margin-inline: 4%; background: var(--liner); overflow: hidden;
+      padding: 0 0.75rem 0.75rem; border-radius: 0 0 4px 4px;
+    }
+    .feed-inner { animation: feed 1.5s steps(30, end) 0.25s both; }
+    @keyframes feed { from { transform: translateY(-103%); } to { transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .feed-inner { animation: none; } html { scroll-behavior: auto; } }
 
-    .profile-divider { border: none; border-top: 1px solid var(--border); margin-bottom: 1.25rem; }
-    .profile-links { display: flex; gap: 0.5rem; justify-content: center; }
-    .profile-link {
-      display: flex; align-items: center; justify-content: center;
-      width: 36px; height: 36px; border-radius: 8px;
-      background: var(--bg-2); border: 1px solid var(--border);
-      color: var(--text-muted); text-decoration: none; transition: all 0.2s;
+    .label {
+      background: var(--stock); color: var(--print); border-radius: 0 0 7px 7px;
+      font-family: var(--condensed); font-stretch: 68%; line-height: 1.1;
     }
-    .profile-link:hover { color: var(--accent); border-color: rgba(79,142,247,0.35); }
-    .profile-link svg { width: 16px; height: 16px; }
+    .label > div { padding: 0.8rem 1rem; border-bottom: 3px solid var(--print); }
+    .label > div:last-child { border-bottom: 0; }
+    .label small { display: block; font: 600 0.6875rem/1.2 var(--body); font-stretch: 100%; margin-bottom: 0.2rem; }
+    .label .to { font-size: 2.75rem; font-weight: 900; line-height: 0.95; padding-top: 1rem; }
+    .label .role { font-size: 1.375rem; font-weight: 700; }
+    .label .cells { display: grid; grid-template-columns: 1.2fr 1fr 0.8fr; padding: 0; }
+    .label .cells span { padding: 0.7rem 1rem; font-size: 1.25rem; font-weight: 700; border-left: 3px solid var(--print); }
+    .label .cells span:first-child { border-left: 0; }
+    .label .code { text-align: center; padding-block: 1rem 0.8rem; }
+    .label .code svg { width: 100%; height: 4.5rem; display: block; }
+    .label .code a { display: inline-block; margin-top: 0.4rem; font: 500 0.8125rem/1 var(--mono); color: var(--print); text-decoration: none; }
+    .label .code a:hover { text-decoration: underline; }
 
-    /* ── SECTION ── */
-    section { padding: 6rem 2.5rem; }
-    .section-inner { max-width: 1160px; margin: 0 auto; }
-    .section-eyebrow {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+    .zpl {
+      background: #101214; color: #D8DEE5; border-radius: 0 0 7px 7px;
+      font: 400 0.78rem/1.65 var(--mono); padding: 1rem; overflow-x: auto; white-space: pre; tab-size: 2;
     }
-    .section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--accent); border-radius: 1px; }
-    .section-title {
-      font-size: clamp(1.9rem, 3.5vw, 2.75rem); font-weight: 800;
-      letter-spacing: -1.2px; margin-bottom: 1rem; line-height: 1.15;
+    .zpl b { color: var(--liner); font-weight: 500; }
+    [hidden] { display: none !important; }
+    .tabs { display: flex; gap: 0.25rem; margin: 0.9rem 4% 0; }
+    .tabs button {
+      font: 600 0.875rem/1 var(--body); padding: 0.55rem 0.8rem; border-radius: 4px; cursor: pointer;
+      background: none; border: 1.5px solid transparent; color: var(--muted);
     }
-    .section-sub { color: var(--text-muted); max-width: 540px; line-height: 1.8; margin-bottom: 3rem; }
-    .divider { border: none; border-top: 1px solid var(--border); }
+    .tabs button:hover { color: var(--ink); }
+    .tabs button[aria-selected="true"] { border-color: var(--ink); color: var(--ink); }
+    .tabs p { margin-left: auto; align-self: center; font-size: 0.8125rem; color: var(--muted); }
 
-    /* ── ABOUT ── */
-    .about { background: var(--bg-2); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-    .about-text { color: var(--text-muted); line-height: 1.9; font-size: 1rem; }
-    .about-text p + p { margin-top: 1rem; }
-    .about-text strong { color: var(--text); font-weight: 600; }
-    .about-highlights { display: flex; flex-direction: column; gap: 0.9rem; }
-    .highlight-item {
-      display: flex; align-items: flex-start; gap: 1rem;
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.1rem 1.25rem; transition: border-color 0.2s;
+    /* sections: heading rail left, content right */
+    .sec { border-top: 1px solid var(--rule); }
+    .sec > .wrap {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+      gap: 1.5rem clamp(2rem, 5vw, 4rem); padding-block: clamp(3rem, 6vw, 4.75rem);
     }
-    .highlight-item:hover { border-color: var(--border-hover); }
-    .highlight-icon {
-      width: 38px; height: 38px; border-radius: 9px;
-      background: var(--accent-glow); border: 1px solid rgba(79,142,247,0.18);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0;
-    }
-    .highlight-title { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.2rem; }
-    .highlight-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+    .sec h2 { position: sticky; top: 5.25rem; align-self: start; }
+    .body > * + * { margin-top: 1.1rem; }
 
-    /* ── SKILLS ── */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
-    .skill-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.5rem; transition: all 0.25s;
-    }
-    .skill-card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-    .skill-card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
-    .skill-icon {
-      width: 42px; height: 42px; border-radius: 10px;
-      background: var(--accent-glow); border: 1px solid rgba(79,142,247,0.18);
-      display: flex; align-items: center; justify-content: center; font-size: 1.15rem;
-    }
-    .skill-card-title { font-weight: 700; font-size: 0.95rem; }
-    .skill-card-sub { font-size: 0.77rem; color: var(--text-muted); }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-    .tag {
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      border-radius: 6px; padding: 0.22rem 0.6rem;
-      font-size: 0.77rem; font-weight: 500; color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-    }
+    .about { display: grid; grid-template-columns: minmax(0, 1fr) 8.5rem; gap: 2.5rem; align-items: start; }
+    .about img { border-radius: 4px; width: 8.5rem; aspect-ratio: 1; object-fit: cover; }
+    .about p + p { margin-top: 1.1rem; }
 
-    /* ── APPS ── */
-    .apps { background: var(--bg-2); }
-    .apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
-    .app-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 18px; overflow: hidden; display: flex; flex-direction: column;
-      transition: all 0.25s; position: relative;
-    }
-    .app-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(79,142,247,0.4), transparent);
-    }
-    .app-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
-    .app-card-body { padding: 1.75rem; flex: 1; }
-    .app-top { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem; }
-    .app-icon {
-      width: 64px; height: 64px; border-radius: 14px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; border: 1px solid var(--border);
-    }
-    .app-meta { flex: 1; }
-    .app-name { font-weight: 800; font-size: 1.05rem; margin-bottom: 0.2rem; letter-spacing: -0.3px; }
-    .app-tagline { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; }
-    .app-category-badge {
-      display: inline-flex; align-items: center; gap: 0.3rem;
-      background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.2);
-      border-radius: 99px; padding: 0.15rem 0.6rem;
-      font-size: 0.72rem; font-weight: 600; color: var(--accent-light);
-    }
-    .app-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem; }
-    .app-features { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem; }
-    .app-feature {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-size: 0.82rem; color: var(--text-muted);
-    }
-    .app-feature::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-    .app-card-footer {
-      padding: 1.25rem 1.75rem; border-top: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    }
-    .app-info { display: flex; gap: 1rem; }
-    .app-info-item { display: flex; flex-direction: column; }
-    .app-info-label { font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-    .app-info-value { font-size: 0.82rem; font-weight: 600; color: var(--text); }
-    .app-store-btn {
-      display: flex; align-items: center; gap: 0.5rem;
-      background: var(--text); color: var(--bg); text-decoration: none;
-      padding: 0.55rem 1.1rem; border-radius: 9px; font-size: 0.8rem;
-      font-weight: 700; white-space: nowrap; transition: all 0.2s; flex-shrink: 0;
-    }
-    .app-store-btn:hover { background: var(--accent); color: #fff; transform: scale(1.03); }
-    .app-store-btn svg { width: 16px; height: 16px; }
+    .job-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.25rem 1.5rem; }
+    .job-head time, .job-head span { color: var(--muted); font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
+    .job + .job { margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--rule); }
+    .job > p { margin-top: 0.6rem; }
+    .duties { list-style: none; margin-top: 1.5rem; display: grid; gap: 1.1rem; }
+    .duties li { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 0.25rem 1.5rem; }
+    .duties strong { font-weight: 650; }
+    .duties span { color: var(--muted); max-width: 56ch; }
 
-    /* ── PROJECTS ── */
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
-    .project-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
-      transition: all 0.25s;
-    }
-    .project-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
-    .project-header { padding: 1.5rem 1.5rem 1rem; }
-    .project-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.9rem; }
-    .project-icon { font-size: 1.5rem; }
-    .project-links { display: flex; gap: 0.5rem; }
-    .project-link {
-      display: flex; align-items: center; justify-content: center;
-      width: 30px; height: 30px; border-radius: 7px;
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      color: var(--text-muted); text-decoration: none; transition: all 0.2s;
-    }
-    .project-link:hover { color: var(--accent); border-color: rgba(79,142,247,0.35); }
-    .project-link svg { width: 15px; height: 15px; }
-    .project-title { font-weight: 700; font-size: 0.98rem; margin-bottom: 0.5rem; }
-    .project-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
-    .project-footer {
-      padding: 0.9rem 1.5rem 1.25rem; margin-top: auto;
-      border-top: 1px solid var(--border); display: flex; align-items: center; gap: 1rem;
-    }
-    .project-lang { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-muted); }
-    .lang-dot { width: 9px; height: 9px; border-radius: 50%; }
-    .project-stars { display: flex; align-items: center; gap: 0.3rem; font-size: 0.78rem; color: var(--text-muted); }
+    .apps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+    .app { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 1.5rem; display: flex; flex-direction: column; }
+    .app-top { display: flex; gap: 1rem; align-items: center; }
+    .app-top img { width: 4rem; height: 4rem; border-radius: 22.5%; flex: none; }
+    .app-top p { color: var(--muted); font-size: 0.9375rem; margin-top: 0.2rem; }
+    .app > p { margin-top: 1.1rem; }
+    .app ul { margin: 1rem 0 1.5rem; padding-left: 1.1rem; color: var(--muted); font-size: 0.9688rem; display: grid; gap: 0.3rem; }
+    .app .btn { margin-top: auto; align-self: flex-start; }
 
-    /* ── EXPERIENCE ── */
-    .timeline { position: relative; }
-    .timeline::before {
-      content: ''; position: absolute; left: 19px; top: 8px; bottom: 40px;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--accent) 0%, rgba(79,142,247,0.1) 100%);
-      border-radius: 1px;
-    }
-    .timeline-item { display: flex; gap: 2rem; padding-bottom: 2.5rem; }
-    .timeline-item:last-child { padding-bottom: 0; }
-    .timeline-dot {
-      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
-      background: var(--bg-card); border: 2px solid var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.95rem; position: relative; z-index: 1;
-      box-shadow: 0 0 0 4px rgba(79,142,247,0.12);
-    }
-    .timeline-content {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.25rem 1.5rem; flex: 1;
-      transition: border-color 0.2s;
-    }
-    .timeline-content:hover { border-color: var(--border-hover); }
-    .timeline-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.25rem; flex-wrap: wrap; }
-    .timeline-period {
-      font-size: 0.72rem; font-weight: 700; color: var(--accent);
-      text-transform: uppercase; letter-spacing: 0.8px;
-      background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.18);
-      padding: 0.2rem 0.6rem; border-radius: 99px; white-space: nowrap;
-    }
-    .timeline-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
-    .timeline-company {
-      font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.9rem;
-      display: flex; align-items: center; gap: 0.4rem;
-    }
-    .timeline-company a { color: inherit; text-decoration: none; }
-    .timeline-company a:hover { color: var(--accent); }
-    .timeline-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.75; }
-    .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
+    .repos { list-style: none; }
+    .repos li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.4rem 2rem; padding-block: 1.5rem; border-bottom: 1px solid var(--rule); }
+    .repos li:first-child { padding-top: 0; }
+    .repos h3 a { color: var(--ink); text-decoration: none; }
+    .repos h3 a:hover { color: var(--blue); }
+    .repos p { color: var(--muted); grid-column: 1; }
+    .repos .meta { grid-column: 2; grid-row: 1 / span 2; text-align: right; font-size: 0.9375rem; color: var(--muted); display: grid; gap: 0.3rem; align-content: start; white-space: nowrap; }
+    .repos + p { margin-top: 1.5rem; }
 
-    /* ── CONTACT ── */
-    .contact { background: var(--bg-2); }
-    .contact-wrapper { display: grid; grid-template-columns: 1fr; gap: 5rem; align-items: start; max-width: 560px; }
-    .contact-text { color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; }
-    .contact-links { display: flex; flex-direction: column; gap: 0.85rem; }
-    .contact-link {
-      display: flex; align-items: center; gap: 1rem;
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius-sm); padding: 0.9rem 1.1rem;
-      text-decoration: none; color: var(--text); transition: all 0.2s;
-    }
-    .contact-link:hover { border-color: var(--border-hover); transform: translateX(4px); }
-    .contact-link-icon {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: var(--accent-glow); border: 1px solid rgba(79,142,247,0.18);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .contact-link-icon svg { width: 17px; height: 17px; color: var(--accent); }
-    .contact-link-label { font-weight: 600; font-size: 0.88rem; display: block; }
-    .contact-link-value { color: var(--text-muted); font-size: 0.79rem; }
+    .kit { display: grid; gap: 0; }
+    .kit div { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 0.25rem 1.5rem; padding-block: 0.9rem; border-bottom: 1px solid var(--rule); }
+    .kit div:first-child { padding-top: 0; }
+    .kit dt { font-weight: 650; }
+    .kit dd { color: var(--muted); }
 
-    /* ── FOOTER ── */
-    footer {
-      padding: 2rem 2.5rem; border-top: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-    }
-    .footer-copy { font-size: 0.82rem; color: var(--text-dim); }
-    .footer-copy a { color: var(--text-muted); text-decoration: none; }
-    .footer-copy a:hover { color: var(--accent); }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { font-size: 0.82rem; color: var(--text-dim); text-decoration: none; }
-    .footer-links a:hover { color: var(--accent); }
+    .contact-links { list-style: none; display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
 
-    /* ── ANIMATIONS ── */
-    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem; padding-block: 1.75rem; border-top: 1px solid var(--rule); font-size: 0.9375rem; color: var(--muted); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .hero-visual { order: -1; }
-      .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
-      .nav-links { display: none; }
-      .nav-menu-btn { display: flex; }
-      footer { flex-direction: column; text-align: center; }
+    @media (max-width: 860px) {
+      .hero .wrap { grid-template-columns: 1fr; }
+      .printer { justify-self: start; }
+      .sec > .wrap { grid-template-columns: 1fr; }
+      .sec h2 { position: static; }
+      .apps { grid-template-columns: 1fr; }
     }
-    @media (max-width: 600px) {
-      nav { padding: 0 1.25rem; }
-      .hero { padding: 90px 1.25rem 50px; }
-      section { padding: 4rem 1.25rem; }
-      .timeline::before { left: 15px; }
-      .timeline-dot { width: 32px; height: 32px; font-size: 0.82rem; }
-      .timeline-item { gap: 1.25rem; }
-      .app-card-footer { flex-direction: column; align-items: flex-start; }
+    @media (max-width: 560px) {
+      .about { grid-template-columns: 1fr; }
+      .about img { order: -1; width: 6rem; }
+      .duties li, .kit div { grid-template-columns: 1fr; }
+      .repos li { grid-template-columns: 1fr; }
+      .repos .meta { grid-column: 1; grid-row: auto; text-align: left; display: flex; gap: 1rem; }
+      .tabs p { display: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav>
-  <a href="#home" class="nav-logo">
-    <div class="nav-logo-dot"></div>
-    Samed Demir
-  </a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#apps">Apps</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact" class="nav-cta">Contact</a></li>
-  </ul>
-  <button class="nav-menu-btn" id="menuBtn" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<header class="nav">
+  <div class="wrap">
+    <a class="nav-name" href="#home">Samed Demir</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li class="sec-link"><a href="#about">About</a></li>
+        <li class="sec-link"><a href="#work">Work</a></li>
+        <li class="sec-link"><a href="#apps">Apps</a></li>
+        <li class="sec-link"><a href="#open-source">Open source</a></li>
+        <li class="sec-link"><a href="#toolkit">Toolkit</a></li>
+        <li><a class="btn" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-<div class="mobile-nav" id="mobileNav">
-  <a href="#about" onclick="closeMobileNav()">About</a>
-  <a href="#apps" onclick="closeMobileNav()">Apps</a>
-  <a href="#skills" onclick="closeMobileNav()">Skills</a>
-  <a href="#projects" onclick="closeMobileNav()">Projects</a>
-  <a href="#experience" onclick="closeMobileNav()">Experience</a>
-  <a href="#contact" onclick="closeMobileNav()">Contact</a>
-</div>
-
-<!-- ── HERO ── -->
+<main>
 <section class="hero" id="home">
-  <div class="hero-orb-1"></div>
-  <div class="hero-orb-2"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-inner">
-    <div class="fade-in">
-      <h1>
-        <span class="line-1">Senior Mobile</span>
-        <span class="line-2">Software Engineer.</span>
-      </h1>
-
-      <p class="hero-desc">
-        Flutter &amp; Dart specialist with 4.5+ years of experience. Focused on in-store digitalization, hardware integrations, and scalable mobile architecture.
-      </p>
-
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1>Mobile apps that print, scan and sync on the shop floor.</h1>
+      <p>I'm Samed, a senior mobile software engineer at LC Waikiki in Istanbul. I build Flutter apps for kiosks, hand terminals and phones, and the layer that connects them to Zebra printers and barcode scanners.</p>
       <div class="hero-actions">
-        <a href="#apps" class="btn btn-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          My Apps
-        </a>
-        <a href="#experience" class="btn btn-outline">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-          Experience
-        </a>
-        <a href="https://linkedin.com/in/sameetdmr" target="_blank" rel="noopener" class="btn btn-outline">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
+        <a class="btn solid" href="#apps">See my apps</a>
+        <a class="btn" href="https://github.com/Sameetdmr" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://linkedin.com/in/sameetdmr" target="_blank" rel="noopener">LinkedIn</a>
       </div>
+      <p class="status"><i></i>Open to opportunities</p>
     </div>
 
-    <div class="hero-visual fade-in">
-      <div class="profile-card">
-        <div class="profile-glow"></div>
-        <img src="https://avatars.githubusercontent.com/u/43873156?v=4" alt="Samed Demir" class="profile-img" />
-        <div class="profile-name">Samed Demir</div>
-        <div class="profile-title">Senior Mobile Software Engineer</div>
-        <div class="profile-company">@ LC Waikiki · Istanbul</div>
-        <div class="profile-location">
-          <div class="online-dot"></div>
-          Open to opportunities
-        </div>
-        <div class="profile-badges">
-          <span class="profile-badge">Flutter</span>
-          <span class="profile-badge">Dart</span>
-          <span class="profile-badge">iOS</span>
-          <span class="profile-badge">Android</span>
-        </div>
-        <hr class="profile-divider" />
-        <div class="profile-links">
-          <a href="https://github.com/Sameetdmr" target="_blank" rel="noopener" class="profile-link" title="GitHub">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          </a>
-          <a href="https://linkedin.com/in/sameetdmr" target="_blank" rel="noopener" class="profile-link" title="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <a href="https://twitter.com/sameetdmrr" target="_blank" rel="noopener" class="profile-link" title="Twitter">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-          </a>
-          <a href="https://apps.apple.com/developer/samed-demir/id1234567890" target="_blank" rel="noopener" class="profile-link" title="App Store">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
-          </a>
+    <div class="printer">
+      <div class="slot" aria-hidden="true"></div>
+      <div class="feed">
+        <div class="feed-inner">
+          <div class="label" id="view-label" role="tabpanel" aria-labelledby="tab-label">
+            <div class="to"><small>Ship to your team</small>SAMED DEMIR</div>
+            <div class="role"><small>Role</small>Senior Mobile Software Engineer<br />LC Waikiki, Istanbul</div>
+            <div class="cells">
+              <span><small>Stack</small>Flutter, Dart</span>
+              <span><small>Ships to</small>iOS, Android</span>
+              <span><small>Since</small>2021</span>
+            </div>
+            <div class="code">
+              <svg viewBox="0 0 255 1" preserveAspectRatio="none" role="img" aria-label="Code 128 barcode that scans as github.com/Sameetdmr"><path fill="#101214" d="M0 0h2v1h-2zM3 0h1v1h-1zM6 0h1v1h-1zM11 0h1v1h-1zM14 0h2v1h-2zM17 0h1v1h-1zM22 0h1v1h-1zM27 0h2v1h-2zM30 0h1v1h-1zM33 0h1v1h-1zM36 0h4v1h-4zM41 0h1v1h-1zM44 0h1v1h-1zM47 0h2v1h-2zM53 0h1v1h-1zM55 0h1v1h-1zM58 0h4v1h-4zM64 0h1v1h-1zM66 0h1v1h-1zM69 0h1v1h-1zM74 0h2v1h-2zM77 0h1v1h-1zM80 0h2v1h-2zM84 0h3v1h-3zM88 0h1v1h-1zM93 0h1v1h-1zM95 0h2v1h-2zM99 0h1v1h-1zM103 0h4v1h-4zM108 0h1v1h-1zM110 0h4v1h-4zM115 0h3v1h-3zM119 0h1v1h-1zM121 0h1v1h-1zM123 0h3v1h-3zM128 0h2v1h-2zM132 0h2v1h-2zM135 0h3v1h-3zM139 0h1v1h-1zM143 0h1v1h-1zM146 0h1v1h-1zM148 0h2v1h-2zM154 0h4v1h-4zM159 0h3v1h-3zM163 0h1v1h-1zM165 0h1v1h-1zM167 0h2v1h-2zM171 0h1v1h-1zM176 0h1v1h-1zM178 0h2v1h-2zM182 0h1v1h-1zM187 0h1v1h-1zM190 0h4v1h-4zM195 0h1v1h-1zM198 0h1v1h-1zM203 0h1v1h-1zM206 0h2v1h-2zM209 0h4v1h-4zM214 0h3v1h-3zM218 0h1v1h-1zM220 0h1v1h-1zM223 0h1v1h-1zM226 0h4v1h-4zM231 0h1v1h-1zM236 0h2v1h-2zM240 0h1v1h-1zM242 0h2v1h-2zM247 0h3v1h-3zM251 0h1v1h-1zM253 0h2v1h-2z"/></svg>
+              <a href="https://github.com/Sameetdmr" target="_blank" rel="noopener">github.com/Sameetdmr</a>
+            </div>
+          </div>
+          <pre class="zpl" id="view-zpl" role="tabpanel" aria-labelledby="tab-zpl" tabindex="0" hidden><b>^XA</b>
+<b>^PW</b>812<b>^LL</b>1015
+
+<b>^CF</b>0,110
+<b>^FO</b>40,70<b>^FD</b>SAMED DEMIR<b>^FS</b>
+<b>^FO</b>0,200<b>^GB</b>812,6,6<b>^FS</b>
+
+<b>^CF</b>0,52
+<b>^FO</b>40,240<b>^FD</b>Senior Mobile Software Engineer<b>^FS</b>
+<b>^FO</b>40,305<b>^FD</b>LC Waikiki, Istanbul<b>^FS</b>
+<b>^FO</b>0,390<b>^GB</b>812,6,6<b>^FS</b>
+
+<b>^FO</b>40,430<b>^FD</b>Flutter, Dart<b>^FS</b>
+<b>^FO</b>350,430<b>^FD</b>iOS, Android<b>^FS</b>
+<b>^FO</b>640,430<b>^FD</b>2021<b>^FS</b>
+<b>^FO</b>0,520<b>^GB</b>812,6,6<b>^FS</b>
+
+<b>^BY</b>3,2,220
+<b>^FO</b>60,590<b>^BC</b>N,220,Y,N,N
+<b>^FD</b>github.com/Sameetdmr<b>^FS</b>
+<b>^XZ</b></pre>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- ── ABOUT ── -->
-<section class="about" id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="fade-in">
-        <div class="section-eyebrow">About Me</div>
-        <h2 class="section-title">Engineering Mobile<br />Experiences at Scale</h2>
-        <div class="about-text">
-          <p>
-            Samed is a <strong>Senior Mobile Software Engineer</strong> with 4.5+ years of experience in the Flutter & Dart ecosystem, specializing in the digitalization of retail and in-store operational systems. High-complexity hardware integrations and scalable enterprise mobile solutions are his core domain.
-          </p>
-          <p>
-            A <strong>Zebra printer integration package</strong> published on pub.dev stands among his open source contributions. Deep expertise has been built in hardware integration via Event Channels, <strong>SQLite offline-first architecture</strong>, and real-time data sync with <strong>SignalR</strong> — all applied with Clean Architecture and SOLID principles.
-          </p>
-        </div>
-      </div>
-      <div class="about-highlights fade-in">
-        <div class="highlight-item">
-          <div class="highlight-icon">🏢</div>
-          <div>
-            <div class="highlight-title">Enterprise Scale</div>
-            <div class="highlight-desc">Building mobile solutions for one of Turkey's biggest retail chains with thousands of daily users across hundreds of stores.</div>
-          </div>
-        </div>
-        <div class="highlight-item">
-          <div class="highlight-icon">📱</div>
-          <div>
-            <div class="highlight-title">App Store Developer</div>
-            <div class="highlight-desc">Independently designed, built and published 2 apps on the Apple App Store — Subly Tracker & Sesli Oyunlar.</div>
-          </div>
-        </div>
-        <div class="highlight-item">
-          <div class="highlight-icon">🔌</div>
-          <div>
-            <div class="highlight-title">Hardware Integrations</div>
-            <div class="highlight-desc">Bluetooth serial, ZPL Zebra printers, Point Mobile PDA barcode scanners, SignalR real-time communication.</div>
-          </div>
-        </div>
-        <div class="highlight-item">
-          <div class="highlight-icon">🌍</div>
-          <div>
-            <div class="highlight-title">Open Source</div>
-            <div class="highlight-desc">Published Flutter packages on pub.dev, contributing tools that other developers use in production.</div>
-          </div>
-        </div>
+      <div class="tabs" role="tablist" aria-label="Label view">
+        <button role="tab" id="tab-label" aria-controls="view-label" aria-selected="true">Label</button>
+        <button role="tab" id="tab-zpl" aria-controls="view-zpl" aria-selected="false">ZPL source</button>
+        <p>The barcode scans.</p>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="divider" />
-
-<!-- ── APPS ── -->
-<section class="apps" id="apps">
-  <div class="section-inner">
-    <div class="fade-in">
-      <div class="section-eyebrow">App Store</div>
-      <h2 class="section-title">Indie Apps</h2>
-      <p class="section-sub">Independently designed and developed applications available on the Apple App Store.</p>
+<section class="sec" id="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <div class="about">
+      <div>
+        <p>Most of my work sits where a mobile app meets a physical device. At LC Waikiki I digitalize in-store operations: the apps staff carry on hand terminals, the kiosks customers use, and the printers and scanners both depend on.</p>
+        <p>That means Bluetooth serial connections, ZPL for Zebra label printers, Point Mobile PDA scanners, offline-first storage in SQLite and real-time sync over SignalR, all built on Clean Architecture and SOLID principles.</p>
+        <p>Outside work I design, build and publish my own apps on the App Store, and I maintain a Zebra printer package on pub.dev that other Flutter developers use.</p>
+      </div>
+      <img src="https://avatars.githubusercontent.com/u/43873156?v=4" alt="Portrait of Samed Demir" width="136" height="136" loading="lazy" />
     </div>
-    <div class="apps-grid">
+  </div>
+</section>
 
-      <!-- Subly Tracker -->
-      <div class="app-card fade-in">
-        <div class="app-card-body">
+<section class="sec" id="work">
+  <div class="wrap">
+    <h2>Work</h2>
+    <div>
+      <article class="job">
+        <div class="job-head">
+          <h3>Software Engineer, <a href="https://www.lcw.com" target="_blank" rel="noopener">LC Waikiki</a></h3>
+          <span>Istanbul, <time datetime="2021-11">Nov 2021</time> to present</span>
+        </div>
+        <p>I joined as a specialist and was promoted to engineer in April 2025, after taking an active role in critical operational transformations and delivering hardware-level solutions. The apps are used every day across hundreds of stores.</p>
+        <ul class="duties">
+          <li><strong>In-store digitalization</strong><span>Built kiosk, hand-terminal and mobile apps that moved store operations off paper.</span></li>
+          <li><strong>Hardware and custom SDK</strong><span>Wrote an in-house communication layer for Zebra printers and Bluetooth over Method and Event Channels, which removed every third-party dependency.</span></li>
+          <li><strong>Architecture</strong><span>Led UI and UX modernization and the move to Clean Architecture across projects, and owned technical decisions and roadmap planning.</span></li>
+          <li><strong>CI/CD</strong><span>Set up an end-to-end pipeline on Firebase App Distribution that shortened release cycles.</span></li>
+          <li><strong>Tech debt</strong><span>Reduced code complexity, improved memory management and sped up SQLite queries.</span></li>
+        </ul>
+      </article>
+      <article class="job">
+        <div class="job-head">
+          <h3>BSc Software Engineering, Fırat University</h3>
+          <span><time datetime="2015">2015</time> to <time datetime="2020">2020</time></span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="apps">
+  <div class="wrap">
+    <h2>Apps</h2>
+    <div class="body">
+      <p>Two apps I designed, built and published on my own. Both are free and work fully offline.</p>
+      <div class="apps">
+        <article class="app">
           <div class="app-top">
-            <div class="app-icon" style="padding:0; overflow:hidden; background:none; border:none;">
-              <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/4b/7f/41/4b7f41d5-076a-2567-038e-b6bb31f13837/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg" alt="Subly Tracker" style="width:64px;height:64px;border-radius:14px;display:block;" />
-            </div>
-            <div class="app-meta">
-              <div class="app-name">Subly Tracker</div>
-              <div class="app-tagline">Subscriptions & reminders</div>
-              <div class="app-category-badge">💰 Finance</div>
-            </div>
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/4b/7f/41/4b7f41d5-076a-2567-038e-b6bb31f13837/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg" alt="" width="64" height="64" loading="lazy" />
+            <div><h3>Subly Tracker</h3><p>Finance, rated 5.0</p></div>
           </div>
-          <p class="app-desc">
-            Track all your subscriptions offline — no bank linking, no ads. See your Netflix, Spotify and every recurring payment in one clean list. Your data never leaves your device.
-          </p>
-          <div class="app-features">
-            <div class="app-feature">Track subscriptions locally — offline first</div>
-            <div class="app-feature">Monthly & yearly spending summaries</div>
-            <div class="app-feature">Category breakdown & billing reminders</div>
-            <div class="app-feature">USD, EUR, TRY · CSV export</div>
-            <div class="app-feature">Optional Face ID app lock</div>
-            <div class="app-feature">Freemium — unlock unlimited with Subly Premium</div>
-          </div>
-        </div>
-        <div class="app-card-footer">
-          <div class="app-info">
-            <div class="app-info-item">
-              <span class="app-info-label">Rating</span>
-              <span class="app-info-value">⭐ 5.0</span>
-            </div>
-            <div class="app-info-item">
-              <span class="app-info-label">Category</span>
-              <span class="app-info-value">Finance</span>
-            </div>
-            <div class="app-info-item">
-              <span class="app-info-label">Price</span>
-              <span class="app-info-value">Free</span>
-            </div>
-          </div>
-          <a href="https://apps.apple.com/tr/app/subly-tracker-app/id6810288833" target="_blank" rel="noopener" class="app-store-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-        </div>
-      </div>
-
-      <!-- Sesli Oyunlar -->
-      <div class="app-card fade-in">
-        <div class="app-card-body">
-          <div class="app-top">
-            <div class="app-icon" style="padding:0; overflow:hidden; background:none; border:none;">
-              <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6e/f4/1a/6ef41ac1-49fc-0b8f-9b5c-114702a4cfdb/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="Sesli Oyunlar" style="width:64px;height:64px;border-radius:14px;display:block;" />
-            </div>
-            <div class="app-meta">
-              <div class="app-name">Sesli Oyunlar</div>
-              <div class="app-tagline">Animal Sounds · Toddler game</div>
-              <div class="app-category-badge">📚 Education</div>
-            </div>
-          </div>
-          <p class="app-desc">
-            Ad-free animal sound &amp; shadow matching game for toddlers aged 2–5. Kids listen to an animal sound, then match the right card and shadow. Fully offline and kid-safe.
-          </p>
-          <div class="app-features">
-            <div class="app-feature">Real animal sounds (cat, dog, cow, lion, and more)</div>
-            <div class="app-feature">Fun shadow matching puzzles</div>
-            <div class="app-feature">Large toddler-friendly buttons</div>
-            <div class="app-feature">Stars, confetti, and encouraging feedback</div>
-            <div class="app-feature">Fully offline — no internet required</div>
-            <div class="app-feature">Zero third-party ads · Zero data collected</div>
-          </div>
-        </div>
-        <div class="app-card-footer">
-          <div class="app-info">
-            <div class="app-info-item">
-              <span class="app-info-label">Rating</span>
-              <span class="app-info-value">⭐ 5.0</span>
-            </div>
-            <div class="app-info-item">
-              <span class="app-info-label">Category</span>
-              <span class="app-info-value">Education</span>
-            </div>
-            <div class="app-info-item">
-              <span class="app-info-label">Price</span>
-              <span class="app-info-value">Free</span>
-            </div>
-          </div>
-          <a href="https://apps.apple.com/tr/app/sesli-oyunlar-animal-sounds/id6806814390" target="_blank" rel="noopener" class="app-store-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- ── SKILLS ── -->
-<section id="skills">
-  <div class="section-inner">
-    <div class="fade-in">
-      <div class="section-eyebrow">Technical Skills</div>
-      <h2 class="section-title">Technologies &amp; Tools</h2>
-      <p class="section-sub">A focused toolkit built around mobile development, refined through real-world enterprise projects and indie app development.</p>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-card fade-in">
-        <div class="skill-card-header">
-          <div class="skill-icon">🐦</div>
-          <div><div class="skill-card-title">Flutter & Dart</div><div class="skill-card-sub">Primary Stack</div></div>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Widgets</span>
-          <span class="tag">Animations</span><span class="tag">State Mgmt</span><span class="tag">pub.dev</span>
-        </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="skill-card-header">
-          <div class="skill-icon">🤖</div>
-          <div><div class="skill-card-title">Android & Java</div><div class="skill-card-sub">Native Development</div></div>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">Java</span><span class="tag">Android SDK</span><span class="tag">Kotlin</span>
-          <span class="tag">Gradle</span><span class="tag">JNI</span>
-        </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="skill-card-header">
-          <div class="skill-icon">⚡</div>
-          <div><div class="skill-card-title">Real-Time & APIs</div><div class="skill-card-sub">Communication</div></div>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">SignalR</span><span class="tag">REST API</span><span class="tag">Firebase</span>
-          <span class="tag">Firestore</span><span class="tag">Remote Config</span><span class="tag">Dio</span>
-        </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="skill-card-header">
-          <div class="skill-icon">🔗</div>
-          <div><div class="skill-card-title">Hardware & Connectivity</div><div class="skill-card-sub">Device Integrations</div></div>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">Bluetooth</span><span class="tag">BLE</span><span class="tag">Serial</span>
-          <span class="tag">ZPL</span><span class="tag">Zebra SDK</span><span class="tag">Barcode</span>
-        </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="skill-card-header">
-          <div class="skill-icon">🛠️</div>
-          <div><div class="skill-card-title">Dev Tooling</div><div class="skill-card-sub">Workflow</div></div>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Jira</span>
-          <span class="tag">LeSS Scrum</span><span class="tag">CI/CD</span><span class="tag">App Store Connect</span>
-        </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="skill-card-header">
-          <div class="skill-icon">🎨</div>
-          <div><div class="skill-card-title">UI/UX Design</div><div class="skill-card-sub">Interface</div></div>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">Material Design</span><span class="tag">Cupertino</span>
-          <span class="tag">Figma</span><span class="tag">Responsive</span><span class="tag">Google Maps</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- ── PROJECTS ── -->
-<section style="background: var(--bg-2);" id="projects">
-  <div class="section-inner">
-    <div class="fade-in">
-      <div class="section-eyebrow">Open Source</div>
-      <h2 class="section-title">GitHub Projects</h2>
-      <p class="section-sub">Flutter packages, plugins and applications published for the developer community.</p>
-    </div>
-    <div class="projects-grid">
-
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div class="project-top">
-            <div class="project-icon">🌙</div>
-            <div class="project-links">
-              <a href="https://github.com/Sameetdmr/Ramazan2024" target="_blank" rel="noopener" class="project-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              </a>
-            </div>
-          </div>
-          <div class="project-title">Ramazan 2024</div>
-          <div class="project-desc">Full-featured Ramadan companion app — daily fasting hours, prayer times, Sahur & Iftar countdowns, and special hadiths. Built with Flutter.</div>
-        </div>
-        <div class="project-footer">
-          <div class="project-lang"><div class="lang-dot" style="background:#00B4AB"></div>Dart</div>
-          <div class="project-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>13</div>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <div class="project-top">
-            <div class="project-icon">🖨️</div>
-            <div class="project-links">
-              <a href="https://github.com/Sameetdmr/zebra_printer" target="_blank" rel="noopener" class="project-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              </a>
-            </div>
-          </div>
-          <div class="project-title">Zebra Printer</div>
-          <div class="project-desc">Flutter management package for Zebra label printers. Bluetooth connectivity and ZPL command transmission using the official Zebra Link-OS SDK.</div>
-        </div>
-        <div class="project-footer">
-          <div class="project-lang"><div class="lang-dot" style="background:#f07219"></div>Java / Flutter</div>
-          <div class="project-stars"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>2</div>
-        </div>
-      </div>
-
-    </div>
-    <div style="text-align:center; margin-top:2.5rem;">
-      <a href="https://github.com/Sameetdmr" target="_blank" rel="noopener" class="btn btn-outline">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        View all on GitHub
-      </a>
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- ── EXPERIENCE ── -->
-<section id="experience">
-  <div class="section-inner">
-    <div class="fade-in">
-      <div class="section-eyebrow">Experience</div>
-      <h2 class="section-title">Career Journey</h2>
-      <p class="section-sub">4+ years at LC Waikiki, growing from specialist assistant to software engineer — shipping mobile products used across hundreds of stores in Turkey.</p>
-    </div>
-    <div class="timeline">
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-dot">💼</div>
-        <div class="timeline-content">
-          <div class="timeline-header">
-            <div>
-              <div class="timeline-title">Software Engineer</div>
-              <div class="timeline-company">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                <a href="https://www.lcw.com" target="_blank" rel="noopener">LC Waikiki</a> · Istanbul
-              </div>
-            </div>
-            <div class="timeline-period">Nov 2021 – Present</div>
-          </div>
-          <div class="timeline-desc">
-            Started as a Specialist and promoted to Engineer in April 2025 after taking an active role in critical operational transformations and delivering hardware-level solutions.
-          </div>
-          <ul style="margin-top:0.75rem; padding-left:1.1rem; display:flex; flex-direction:column; gap:0.45rem;">
-            <li style="font-size:0.85rem; color:var(--text-muted); line-height:1.6;"><strong style="color:var(--text);">Digital Transformation:</strong> Kiosk solutions and hand-terminal & mobile applications were built to digitize in-store operations.</li>
-            <li style="font-size:0.85rem; color:var(--text-muted); line-height:1.6;"><strong style="color:var(--text);">Hardware & Custom SDK:</strong> An in-house communication layer for Zebra printers and Bluetooth operations was developed via Method & Event Channels, eliminating all third-party dependencies.</li>
-            <li style="font-size:0.85rem; color:var(--text-muted); line-height:1.6;"><strong style="color:var(--text);">Architecture Modernization:</strong> UI/UX modernization and Clean Architecture adoption were led across projects; technical decision-making and roadmap planning were owned end-to-end.</li>
-            <li style="font-size:0.85rem; color:var(--text-muted); line-height:1.6;"><strong style="color:var(--text);">End-to-End CI/CD:</strong> A full CI/CD pipeline was established using Firebase App Distribution and automation tooling, significantly accelerating release cycles.</li>
-            <li style="font-size:0.85rem; color:var(--text-muted); line-height:1.6;"><strong style="color:var(--text);">Tech Debt & Refactoring:</strong> Architectural improvements were applied to reduce code complexity, optimize memory management, and boost SQLite query performance.</li>
+          <p>Every subscription in one list, with no bank linking and no ads. Your data never leaves your device.</p>
+          <ul>
+            <li>Monthly and yearly spending summaries</li>
+            <li>Category breakdown and billing reminders</li>
+            <li>USD, EUR and TRY, with CSV export</li>
+            <li>Optional Face ID lock</li>
+            <li>Subly Premium unlocks unlimited subscriptions</li>
           </ul>
-          <div class="timeline-tags" style="margin-top:1rem;">
-            <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">SignalR</span>
-            <span class="tag">SQLite</span><span class="tag">Firebase</span><span class="tag">Clean Architecture</span><span class="tag">CI/CD</span>
+          <a class="btn" href="https://apps.apple.com/tr/app/subly-tracker-app/id6810288833" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>Open in the App Store</a>
+        </article>
+        <article class="app">
+          <div class="app-top">
+            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6e/f4/1a/6ef41ac1-49fc-0b8f-9b5c-114702a4cfdb/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg" alt="" width="64" height="64" loading="lazy" />
+            <div><h3>Sesli Oyunlar</h3><p>Education, rated 5.0</p></div>
           </div>
-        </div>
-      </div>
-
-      <div class="timeline-item fade-in">
-        <div class="timeline-dot">🎓</div>
-        <div class="timeline-content">
-          <div class="timeline-header">
-            <div>
-              <div class="timeline-title">Software Engineering</div>
-              <div class="timeline-company">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                Fırat University
-              </div>
-            </div>
-            <div class="timeline-period">2015 – 2020</div>
-          </div>
-          <div class="timeline-desc">Bachelor's Degree · Software Engineering</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- ── CONTACT ── -->
-<section class="contact" id="contact">
-  <div class="section-inner">
-    <div class="contact-wrapper">
-      <div class="fade-in">
-        <div class="section-eyebrow">Contact</div>
-        <h2 class="section-title">Get in Touch</h2>
-        <p class="contact-text">
-          Open to new opportunities, collaborations and interesting projects. Reach out via LinkedIn or any of the platforms below.
-        </p>
-        <div class="contact-links">
-          <a href="https://linkedin.com/in/sameetdmr" target="_blank" rel="noopener" class="contact-link">
-            <div class="contact-link-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </div>
-            <div>
-              <span class="contact-link-label">LinkedIn</span>
-              <span class="contact-link-value">linkedin.com/in/sameetdmr</span>
-            </div>
-          </a>
-          <a href="https://github.com/Sameetdmr" target="_blank" rel="noopener" class="contact-link">
-            <div class="contact-link-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            </div>
-            <div>
-              <span class="contact-link-label">GitHub</span>
-              <span class="contact-link-value">github.com/Sameetdmr</span>
-            </div>
-          </a>
-          <a href="https://twitter.com/sameetdmrr" target="_blank" rel="noopener" class="contact-link">
-            <div class="contact-link-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-            </div>
-            <div>
-              <span class="contact-link-label">Twitter / X</span>
-              <span class="contact-link-value">@sameetdmrr</span>
-            </div>
-          </a>
-        </div>
+          <p>An animal sound and shadow matching game for children aged 2 to 5. They hear an animal, then find its card and its shadow.</p>
+          <ul>
+            <li>Real animal sounds: cat, dog, cow, lion and more</li>
+            <li>Shadow matching puzzles</li>
+            <li>Large buttons sized for small hands</li>
+            <li>Stars, confetti and encouraging feedback</li>
+            <li>No third-party ads, no data collected</li>
+          </ul>
+          <a class="btn" href="https://apps.apple.com/tr/app/sesli-oyunlar-animal-sounds/id6806814390" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>Open in the App Store</a>
+        </article>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<section class="sec" id="open-source">
+  <div class="wrap">
+    <h2>Open source</h2>
+    <div>
+      <ul class="repos">
+        <li>
+          <h3><a href="https://github.com/Sameetdmr/zebra_printer" target="_blank" rel="noopener">zebra_printer</a></h3>
+          <p>A Flutter package for Zebra label printers. It handles Bluetooth and network discovery, ZPL printing and printer management through the official Zebra Link-OS SDK. <a href="https://pub.dev/packages/zebra_printer" target="_blank" rel="noopener">View on pub.dev</a></p>
+          <div class="meta"><span>Java and Dart</span><span><span data-stars="Sameetdmr/zebra_printer">2</span> stars</span></div>
+        </li>
+        <li>
+          <h3><a href="https://github.com/Sameetdmr/Ramazan2024" target="_blank" rel="noopener">Ramazan 2024</a></h3>
+          <p>A Ramadan companion app in Flutter with daily fasting hours, prayer times, sahur and iftar countdowns, and a hadith for each day.</p>
+          <div class="meta"><span>Dart</span><span><span data-stars="Sameetdmr/Ramazan2024">13</span> stars</span></div>
+        </li>
+      </ul>
+      <p><a href="https://github.com/Sameetdmr" target="_blank" rel="noopener">All repositories on GitHub</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="toolkit">
+  <div class="wrap">
+    <h2>Toolkit</h2>
+    <dl class="kit">
+      <div><dt>Flutter and Dart</dt><dd>Widgets, animations, state management, pub.dev packages</dd></div>
+      <div><dt>Native Android</dt><dd>Java, Kotlin, Android SDK, Gradle, JNI</dd></div>
+      <div><dt>Hardware</dt><dd>Bluetooth, BLE, serial, ZPL, Zebra SDK, barcode scanners</dd></div>
+      <div><dt>Real-time and APIs</dt><dd>SignalR, REST, Dio, Firebase, Firestore, Remote Config</dd></div>
+      <div><dt>Data and architecture</dt><dd>SQLite, offline-first sync, Clean Architecture, SOLID</dd></div>
+      <div><dt>Interface</dt><dd>Material Design, Cupertino, Figma, responsive layouts, Google Maps</dd></div>
+      <div><dt>Workflow</dt><dd>Git, GitHub, Jira, LeSS and Scrum, CI/CD, App Store Connect</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="sec" id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div>
+      <p>I'm open to new roles, collaborations and interesting projects. LinkedIn is the fastest way to reach me.</p>
+      <ul class="contact-links">
+        <li><a class="btn solid" href="https://linkedin.com/in/sameetdmr" target="_blank" rel="noopener">Message me on LinkedIn</a></li>
+        <li><a class="btn" href="https://github.com/Sameetdmr" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a class="btn" href="https://twitter.com/sameetdmrr" target="_blank" rel="noopener">X (Twitter)</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
 <footer>
-  <div class="footer-copy">
-    &copy; 2026 <a href="https://github.com/Sameetdmr">Samed Demir</a> · Mobile Software Engineer · Istanbul, Turkey
-  </div>
-  <div class="footer-links">
-    <a href="https://github.com/Sameetdmr" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://linkedin.com/in/sameetdmr" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://twitter.com/sameetdmrr" target="_blank" rel="noopener">Twitter</a>
-    <a href="https://apps.apple.com/tr/app/subly-tracker-app/id6810288833" target="_blank" rel="noopener">App Store</a>
+  <div class="wrap">
+    <span>&copy; <span id="year">2026</span> Samed Demir, Istanbul</span>
+    <a href="#home">Back to top</a>
   </div>
 </footer>
 
 <script>
-  // Mobile nav
-  document.getElementById('menuBtn').addEventListener('click', () =>
-    document.getElementById('mobileNav').classList.toggle('open'));
-  function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
-
-  // Fade-in on scroll
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  // Stagger grid children
-  document.querySelectorAll('.skills-grid, .projects-grid, .apps-grid').forEach(grid => {
-    grid.querySelectorAll('.fade-in').forEach((el, i) => {
-      el.style.transitionDelay = `${i * 75}ms`;
+  // Label / ZPL tabs
+  const tabs = [...document.querySelectorAll('.tabs [role="tab"]')];
+  function show(tab) {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(t));
+    t.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      show(next); next.focus();
     });
   });
+  show(tabs[0]);
 
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Active nav highlight
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
-    navLinks.forEach(a => {
-      const isActive = a.getAttribute('href') === `#${current}`;
-      a.style.color = isActive ? 'var(--text)' : '';
-    });
-  }, { passive: true });
+  // Live star counts; the numbers in the markup stay if the request fails
+  document.querySelectorAll('[data-stars]').forEach(el => {
+    fetch('https://api.github.com/repos/' + el.dataset.stars)
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d && Number.isInteger(d.stargazers_count)) el.textContent = d.stargazers_count; })
+      .catch(() => {});
+  });
 </script>
 </body>
 </html>
